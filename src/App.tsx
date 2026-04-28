@@ -58,7 +58,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false)
   const [activeTopicIdx, setActiveTopicIdx] = useState<number | null>(null)
   const [theme, setTheme] = useState<'dark' | 'light'>(() => {
-    return (localStorage.getItem('medical-agent-theme') as 'dark' | 'light') || 'dark'
+    return (localStorage.getItem('medical-agent-theme') as 'dark' | 'light') || 'light'
   })
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
