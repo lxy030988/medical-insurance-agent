@@ -1,4 +1,4 @@
-/* ===== CSS Variables ===== */
+/* ===== CSS Variables - Dark Theme (default) ===== */
 :root {
   --primary: #1a6eff;
   --primary-dark: #0f52cc;
@@ -22,6 +22,7 @@
   --text-secondary: #8ba4c8;
   --text-muted: #4a6080;
   --text-accent: #4d8fff;
+  --text-hotline: #ffffff;
 
   --shadow-glow: 0 0 30px rgba(26, 110, 255, 0.15);
   --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
@@ -34,6 +35,39 @@
   --radius-full: 999px;
 
   --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --theme-transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ===== Light Theme ===== */
+[data-theme="light"] {
+  --primary-glow: rgba(26, 110, 255, 0.15);
+  --accent-light: #00a892;
+
+  --bg-base: #f0f5ff;
+  --bg-surface: #ffffff;
+  --bg-card: #f8faff;
+  --bg-card-hover: #eef3ff;
+  --bg-input: #ffffff;
+  --bg-user-bubble: #dbeafe;
+  --bg-bot-bubble: #f8faff;
+
+  --border: rgba(26, 110, 255, 0.18);
+  --border-subtle: rgba(0, 0, 0, 0.07);
+
+  --text-primary: #1a2744;
+  --text-secondary: #4a6080;
+  --text-muted: #8ba4c8;
+  --text-accent: #1a6eff;
+  --text-hotline: #1a2744;
+
+  --shadow-glow: 0 0 30px rgba(26, 110, 255, 0.1);
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.08);
+  --shadow-input: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* Apply smooth theme transition to everything */
+*, *::before, *::after {
+  transition: var(--theme-transition);
 }
 
 /* ===== Reset ===== */
@@ -41,6 +75,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  /* transition already added in theme block above */
 }
 
 html, body, #root {
@@ -78,8 +113,8 @@ body {
   bottom: 0;
   background: var(--bg-base);
   background-image:
-    radial-gradient(ellipse 80% 50% at 20% 0%, rgba(26, 110, 255, 0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(0, 194, 168, 0.05) 0%, transparent 60%);
+    radial-gradient(ellipse 80% 50% at 20% 0%, rgba(26, 110, 255, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(0, 194, 168, 0.04) 0%, transparent 60%);
 }
 
 /* ===== Sidebar ===== */
@@ -241,7 +276,7 @@ body {
 .hotline-number {
   font-size: 20px;
   font-weight: 700;
-  color: white;
+  color: var(--text-hotline);
   letter-spacing: 1px;
 }
 
@@ -328,6 +363,30 @@ body {
   font-size: 12px;
   color: var(--text-accent);
   font-weight: 500;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: rotate(20deg);
 }
 
 /* Messages */
@@ -503,6 +562,7 @@ body {
 .message.user .message-avatar {
   background: var(--bg-user-bubble);
   border: 1px solid rgba(26, 110, 255, 0.3);
+  color: var(--text-primary);
 }
 
 .message-content {

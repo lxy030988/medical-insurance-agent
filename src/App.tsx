@@ -57,8 +57,20 @@ export default function App() {
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [activeTopicIdx, setActiveTopicIdx] = useState<number | null>(null)
+  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
+    return (localStorage.getItem('medical-agent-theme') as 'dark' | 'light') || 'dark'
+  })
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme)
+    localStorage.setItem('medical-agent-theme', theme)
+  }, [theme])
+
+  const toggleTheme = () => {
+    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'))
+  }
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -203,7 +215,9 @@ export default function App() {
               </div>
             </div>
           </div>
-          {/* <div className="header-badge">DeepSeek AI 驱动</div> */}
+          <button className="theme-toggle" onClick={toggleTheme} title="切换主题">
+            {theme === 'dark' ? '☀️' : '🌙'}
+          </button>
         </header>
 
         {/* Messages or Welcome */}
